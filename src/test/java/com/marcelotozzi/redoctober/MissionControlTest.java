@@ -7,8 +7,8 @@ import org.junit.Test;
 import static com.marcelotozzi.redoctober.entity.enums.DIRECTION.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
 
 /**
  * Created by marcelotozzi on 15/07/16.
@@ -26,9 +26,9 @@ public class MissionControlTest {
     public void itShouldTurnLeftAndBeWest() throws Exception {
         redoctober.receiveCommands("L");
 
-        assertThat(redoctober, hasProperty("x", is(eq(0))));
-        assertThat(redoctober, hasProperty("y", is(eq(0))));
-        assertThat(redoctober, hasProperty("z", is(eq(0))));
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
         assertThat(redoctober, hasProperty("direction", is(WEST)));
     }
 
@@ -36,9 +36,9 @@ public class MissionControlTest {
     public void itShouldTurnRightAndBeEast() throws Exception {
         redoctober.receiveCommands("R");
 
-        assertThat(redoctober, hasProperty("x", is(eq(0))));
-        assertThat(redoctober, hasProperty("y", is(eq(0))));
-        assertThat(redoctober, hasProperty("z", is(eq(0))));
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
         assertThat(redoctober, hasProperty("direction", is(EAST)));
     }
 
@@ -46,9 +46,9 @@ public class MissionControlTest {
     public void itShouldTurnRightTwiceAndBeWest() throws Exception {
         redoctober.receiveCommands("RR");
 
-        assertThat(redoctober, hasProperty("x", is(eq(0))));
-        assertThat(redoctober, hasProperty("y", is(eq(0))));
-        assertThat(redoctober, hasProperty("z", is(eq(0))));
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
         assertThat(redoctober, hasProperty("direction", is(SOUTH)));
     }
 
@@ -56,9 +56,9 @@ public class MissionControlTest {
     public void itShouldTurnRight3TimesAndBeWest() throws Exception {
         redoctober.receiveCommands("RRR");
 
-        assertThat(redoctober, hasProperty("x", is(eq(0))));
-        assertThat(redoctober, hasProperty("y", is(eq(0))));
-        assertThat(redoctober, hasProperty("z", is(eq(0))));
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
         assertThat(redoctober, hasProperty("direction", is(WEST)));
     }
 
@@ -66,9 +66,9 @@ public class MissionControlTest {
     public void itShouldTurnRight4TimesAndBeWest() throws Exception {
         redoctober.receiveCommands("RRRR");
 
-        assertThat(redoctober, hasProperty("x", is(eq(0))));
-        assertThat(redoctober, hasProperty("y", is(eq(0))));
-        assertThat(redoctober, hasProperty("z", is(eq(0))));
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
         assertThat(redoctober, hasProperty("direction", is(NORTH)));
     }
 
@@ -76,9 +76,29 @@ public class MissionControlTest {
     public void itShouldNotTurnForAInvalidCommand() throws Exception {
         redoctober.receiveCommands("TTT");
 
-        assertThat(redoctober, hasProperty("x", is(eq(0))));
-        assertThat(redoctober, hasProperty("y", is(eq(0))));
-        assertThat(redoctober, hasProperty("z", is(eq(0))));
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("direction", is(NORTH)));
+    }
+
+    @Test
+    public void itShouldUpInDirectionToNorth(){
+        redoctober.receiveCommands("U");
+
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(1))));
+        assertThat(redoctober, hasProperty("direction", is(NORTH)));
+    }
+
+    @Test
+    public void itShouldDownInDirectionToNorth(){
+        redoctober.receiveCommands("D");
+
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(-1))));
         assertThat(redoctober, hasProperty("direction", is(NORTH)));
     }
 }

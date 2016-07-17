@@ -1,8 +1,8 @@
 package com.marcelotozzi.redoctober.entity;
 
-import com.marcelotozzi.redoctober.entity.enums.ACTION;
-import com.marcelotozzi.redoctober.entity.enums.COMMAND;
 import com.marcelotozzi.redoctober.entity.enums.DIRECTION;
+import com.marcelotozzi.redoctober.entity.enums.MOVEMENT;
+import com.marcelotozzi.redoctober.entity.enums.SPIN;
 
 import static com.marcelotozzi.redoctober.entity.enums.DIRECTION.*;
 
@@ -18,7 +18,6 @@ public class Submarine {
     private DIRECTION[] directions = new DIRECTION[]{NORTH, EAST, SOUTH, WEST};
 
     private Submarine() {
-        compass = new Compass<>(directions);
     }
 
     public Submarine(int x, int y, int z, DIRECTION initialDirection) {
@@ -48,25 +47,40 @@ public class Submarine {
     public void receiveCommands(String commands) {
         for (char character : commands.toCharArray()) {
 
-            if (COMMAND.contains(character)) {
-                applyCommand(COMMAND.valueOf(character));
+            if (SPIN.contains(character)) {
+                applySpin(SPIN.valueOf(character));
                 continue;
             }
 
-            if (ACTION.contains(character)) {
-                applyAction(ACTION.valueOf(character));
+            if (MOVEMENT.contains(character)) {
+                applyMovement(MOVEMENT.valueOf(character));
                 continue;
             }
         }
     }
 
-    private void applyAction(ACTION action) {
-        //TODO:
+    private void applyMovement(MOVEMENT movement) {
+        switch (movement) {
+            case U:
+                if (isNotOnTheSurface()) z += 1;
+                break;
+            case D:
+                z -= 1;
+                break;
+            case M:
+                break;
+            default:
+                break;
+        }
     }
 
-    private void applyCommand(COMMAND command) {
+    private boolean isNotOnTheSurface() {
+        return (z <= 0);
+    }
+
+    private void applySpin(SPIN spin) {
         int index = compass.indexOf(direction);
-        switch (command) {
+        switch (spin) {
             case L:
                 direction = compass.get(index - 1);
                 break;
