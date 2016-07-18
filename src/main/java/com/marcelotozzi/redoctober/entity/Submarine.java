@@ -68,6 +68,19 @@ public class Submarine {
                 z -= 1;
                 break;
             case M:
+                switch (direction) {
+                    case NORTH:
+                        y += 1;
+                        break;
+                    case SOUTH:
+                        y -= 1;
+                        break;
+                    case EAST:
+                        x += 1;
+                        break;
+                    case WEST:
+                        x -= 1;
+                }
                 break;
             default:
                 break;
@@ -75,7 +88,7 @@ public class Submarine {
     }
 
     private boolean isNotOnTheSurface() {
-        return (z <= 0);
+        return (z < 0);
     }
 
     private void applySpin(SPIN spin) {

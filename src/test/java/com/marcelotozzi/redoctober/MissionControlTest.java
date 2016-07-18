@@ -83,22 +83,64 @@ public class MissionControlTest {
     }
 
     @Test
-    public void itShouldUpInDirectionToNorth(){
+    public void itShouldUpInDirectionToNorth() {
+        redoctober = new Submarine(0, 0, -1, NORTH);
+
         redoctober.receiveCommands("U");
 
         assertThat(redoctober, hasProperty("x", is(equalTo(0))));
         assertThat(redoctober, hasProperty("y", is(equalTo(0))));
-        assertThat(redoctober, hasProperty("z", is(equalTo(1))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
         assertThat(redoctober, hasProperty("direction", is(NORTH)));
     }
 
     @Test
-    public void itShouldDownInDirectionToNorth(){
+    public void itShouldDownInDirectionToNorth() {
         redoctober.receiveCommands("D");
 
         assertThat(redoctober, hasProperty("x", is(equalTo(0))));
         assertThat(redoctober, hasProperty("y", is(equalTo(0))));
         assertThat(redoctober, hasProperty("z", is(equalTo(-1))));
         assertThat(redoctober, hasProperty("direction", is(NORTH)));
+    }
+
+    @Test
+    public void itShouldMoveToDirectionNorth() {
+        redoctober.receiveCommands("M");
+
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(1))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("direction", is(NORTH)));
+    }
+
+    @Test
+    public void itShouldStopInSurface(){
+        redoctober.receiveCommands("UUUUUUUU");
+
+        assertThat(redoctober, hasProperty("x", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
+        assertThat(redoctober, hasProperty("direction", is(NORTH)));
+    }
+
+    @Test
+    public void firstSequence() {
+        redoctober.receiveCommands("LMRDDMMUU");
+
+        assertThat(redoctober, hasProperty("direction", is(NORTH)));
+        assertThat(redoctober, hasProperty("x", is(equalTo(-1))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(2))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(0))));
+    }
+
+    @Test
+    public void secondSequence() {
+        redoctober.receiveCommands("RMMLMMMDDLL");
+
+        assertThat(redoctober, hasProperty("direction", is(SOUTH)));
+        assertThat(redoctober, hasProperty("x", is(equalTo(2))));
+        assertThat(redoctober, hasProperty("y", is(equalTo(3))));
+        assertThat(redoctober, hasProperty("z", is(equalTo(-2))));
     }
 }
