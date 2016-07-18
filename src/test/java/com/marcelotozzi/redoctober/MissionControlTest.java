@@ -20,7 +20,7 @@ public class MissionControlTest {
 
     @Before
     public void setUp() throws Exception {
-        redoctober = new Submarine(0, 0, 0, NORTH);
+        redoctober = new Submarine();
     }
 
     @Test

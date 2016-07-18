@@ -15,7 +15,8 @@ public class Submarine {
     private Compass<DIRECTION> compass;
     private DIRECTION[] directions = new DIRECTION[]{NORTH, EAST, SOUTH, WEST};
 
-    private Submarine() {
+    public Submarine() {
+        this(0, 0, 0, NORTH);
     }
 
     public Submarine(int x, int y, int z, DIRECTION initialDirection) {
